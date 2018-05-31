@@ -7,7 +7,7 @@
 #include <evaluate_comp_impl.hpp>
 
 //#include <evaluate_compression_impl.hpp>
-struct encoder_params
+/*struct encoder_params
 {
 	int num_threads;
 	bool do_inter_frame;
@@ -17,7 +17,7 @@ struct encoder_params
 	int color_bits;
 	int jpeg_quality;
 	int macroblock_size;
-};
+};*/
 /*evaluate_compression_impl<PointT>::assign_option_values()
 {
 	algorithm_ = vm_["algorithm"].template as<std::string>();
@@ -67,13 +67,13 @@ CWI_ENCODE_API int fncwi_encode(void)
 
 // This is the constructor of a class that has been exported.
 // see cwi_encode.h for the class definition
-Ccwi_encode::Ccwi_encode()
+Ccwi_encode::Ccwi_decode()
 {
     return;
 }
 //Final encoding function for signals
-CWI_ENCODE_API int cwi_encoder(encoder_params param, boost::shared_ptr<pcl::PointCloud<PointT> > pointcloud, std::ostream& comp_frame)
+CWI_ENCODE_API int cwi_decoder(boost::shared_ptr<pcl::PointCloud<PointT> > &pointcloud, std::ostream& comp_frame)
 {
-	evaluate_comp_impl<PointXYZRGB> evaluator(param, pointcloud, comp_frame);
+	evaluate_comp_impl<PointXYZRGB> evaluator(pointcloud, comp_frame);
 	return evaluator.evaluate_comp() == true ? 0 : -1;
 }
